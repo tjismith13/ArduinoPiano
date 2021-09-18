@@ -1,3 +1,5 @@
+#include "Notes.h"
+
 // Define pin locations
 
 const int pinA = 2;
@@ -17,6 +19,12 @@ const int soundPin = 6;
 int rawOctave;
 int rawVol;
 
+int output;
+
+//Frequency converter
+
+extern Converter converter;
+
 void setup() {
   //pin setup
   pinMode(pinA, INPUT);
@@ -32,6 +40,19 @@ void setup() {
   pinMode(soundPin, OUTPUT);
 
   Serial.begin(9600);
+
+// Used to 
+//  output = converter.getFrequency(Converter::A5);
+//  Serial.println(output);
+//
+//  output = converter.getFrequency(Converter::B2);
+//  Serial.println(output);
+//
+//  output = converter.getFrequency(Converter::C3);
+//  Serial.println(output);
+//
+//  output = converter.getFrequency(Converter::G7);
+//  Serial.println(output);
 }
 
 void loop() {
@@ -43,11 +64,20 @@ void loop() {
 //  Serial.println("F " + digitalRead(pinF));
 //  Serial.println("G " + digitalRead(pinG));
 //  Serial.println("Sharp " + digitalRead(pinSharp));
-    rawOctave = analogRead(octavePin);
-    //Serial.println(rawOctave);
+ // rawOctave = analogRead(octavePin);
+ // Serial.println(rawOctave);
+    
+    
+    int output = converter.getFrequency(Converter::A4);
+    tone(soundPin, output);
+    Serial.println(output);
+    delay(2000);
 
-    tone(soundPin, 500);
-    rawVol = analogRead(volPin);
-    Serial.println(rawVol);
-    delay(500);
+    noTone(soundPin);
+    delay(2000);
+
+    int output2 = converter.getFrequency(Converter::C6);
+    tone(soundPin, output2);
+    Serial.println(output2);
+    delay(2000);
 }
