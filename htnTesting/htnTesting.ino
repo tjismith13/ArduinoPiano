@@ -18,6 +18,8 @@ const int soundPin = 6;
 
 int rawOctave;
 int rawVol;
+int octave;
+boolean isSharp = false;
 
 int output;
 
@@ -41,9 +43,12 @@ void setup() {
 
   Serial.begin(9600);
 
-// Used to 
-//  output = converter.getFrequency(Converter::A5);
-//  Serial.println(output);
+// Used to test note conversion code
+  output = converter.getFrequency(Converter::B5);
+  Serial.println(output);
+
+  output = converter.getFrequency(Converter::B, 5, false);
+  Serial.println(output);
 //
 //  output = converter.getFrequency(Converter::B2);
 //  Serial.println(output);
@@ -56,6 +61,8 @@ void setup() {
 }
 
 void loop() {
+
+//Raw reads for debugging
 //  Serial.println("A " + digitalRead(pinA));
 //  Serial.println("B " + digitalRead(pinB));
 //  Serial.println("C " + digitalRead(pinC));
@@ -66,18 +73,16 @@ void loop() {
 //  Serial.println("Sharp " + digitalRead(pinSharp));
  // rawOctave = analogRead(octavePin);
  // Serial.println(rawOctave);
-    
-    
-    int output = converter.getFrequency(Converter::A4);
-    tone(soundPin, output);
-    Serial.println(output);
-    delay(2000);
 
-    noTone(soundPin);
-    delay(2000);
+    // monitor current octave
+    rawOctave = analogRead(octavePin);
+    octave = map(rawOctave, 0, 1023, 8, 0);
+    
+    if(digitalRead(pinSharp)) {
+      Serial.print("Sharp");
+      isSharp = true;
+    }
+    else {isSharp = false;}
 
-    int output2 = converter.getFrequency(Converter::C6);
-    tone(soundPin, output2);
-    Serial.println(output2);
-    delay(2000);
+    
 }

@@ -116,6 +116,21 @@ class Converter {
             A8s = 49,
             B8 = 50
         };
+        enum NoteClass {
+          A,
+          B,
+          C,
+          D,
+          E,
+          F,
+          G,
+          As,
+          Cs,
+          Ds,
+          Fs,
+          Gs
+        };
         int getFrequency(Note note);
+        int getFrequency(NoteClass noteClass, int octave, boolean isSharp);
 };
 #endif
