@@ -1,7 +1,11 @@
+#ifndef Notes_h
+#define Notes_h
+
 #include "Arduino.h"
 
 class Converter {
     public:
+        Converter();
         enum Note {
             C0 = -57,
             C0s = -56,
@@ -14,7 +18,7 @@ class Converter {
             G0s = -49,
             A0 = -48,
             A0s = -47,
-            B0 = -46,
+            BZero = -46,
             C1 = -45,
             C1s = -44,
             D1 = -43,
@@ -26,7 +30,7 @@ class Converter {
             G1s = -37,
             A1 = -36,
             A1s = -35,
-            B1 = -34,
+            BOne = -34,
             C2 = -33,
             C2s = -32,
             D2 = -31,
@@ -100,7 +104,7 @@ class Converter {
             A7s = 37,
             B7 = 38,
             C8 = 39,
-            C8s = 40
+            C8s = 40,
             D8 = 41,
             D8s = 42,
             E8 = 43,
@@ -112,4 +116,6 @@ class Converter {
             A8s = 49,
             B8 = 50
         };
-}
+        int getFrequency(Note note);
+};
+#endif
