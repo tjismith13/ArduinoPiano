@@ -6,7 +6,7 @@ int Converter::getFrequency(Note note) {
     double a = pow(2, root);
     return 440 * pow(a, note);
 }
-int Converter::getFrequency(NoteClass noteClass, int octave, boolean isSharp) {
+int Converter::getFrequency(NoteClass noteClass, int octave) {
     double root = 1.0 / 12.0;
     double a = pow(2, root);
     int octDiff = octave - 4;
@@ -61,4 +61,25 @@ int Converter::getFrequency(NoteClass noteClass, int octave, boolean isSharp) {
         return 440 * pow(a, note);
         break;
     }
+}
+
+FullNoteWrapper::FullNoteWrapper(Converter::NoteClass noteClass, int pin) {
+  note = noteClass;
+  pinNum = pin;
+}
+
+Converter::NoteClass FullNoteWrapper::getNoteClass() {
+  return note;
+}
+
+int FullNoteWrapper::getPin() {
+  return pinNum;
+}
+
+void FullNoteWrapper::setPin(int pin) {
+  pinNum = pin;
+}
+
+void FullNoteWrapper::setNoteClass(Converter::NoteClass noteClass) {
+  note = noteClass;
 }

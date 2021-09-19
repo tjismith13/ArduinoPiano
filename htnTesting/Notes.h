@@ -128,9 +128,23 @@ class Converter {
           Cs,
           Ds,
           Fs,
-          Gs
+          Gs,
+          NOT_SELECTED
         };
         int getFrequency(Note note);
-        int getFrequency(NoteClass noteClass, int octave, boolean isSharp);
+        int getFrequency(NoteClass noteClass, int octave);
+};
+
+class FullNoteWrapper {
+  public:
+    FullNoteWrapper(Converter::NoteClass noteClass, int pin);
+    Converter::NoteClass getNoteClass();
+    void setNoteClass(Converter::NoteClass noteClass);
+    void setPin(int pin);
+    int getPin();
+
+  private:
+    Converter::NoteClass note;
+    int pinNum;
 };
 #endif
